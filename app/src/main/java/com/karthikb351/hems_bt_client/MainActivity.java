@@ -92,7 +92,7 @@ public class MainActivity extends ActionBarActivity {
         Button btnSend = (Button)findViewById(R.id.btnSend);
         btnSend.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
-                bt.send("Text", true);
+                bt.send("gathik", true);
             }
         });
     }
