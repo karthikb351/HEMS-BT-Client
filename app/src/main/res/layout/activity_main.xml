@@ -12,6 +12,23 @@
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:text="Send" />
+    <Button
+        android:id="@+id/btnOn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_below="@id/btnSend"
+        android:text="On" />
+    <Button
+        android:id="@+id/btnOff"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_below="@id/btnOn"
+        android:text="Off" />
+
 
     <Button
         android:id="@+id/btnConnect"

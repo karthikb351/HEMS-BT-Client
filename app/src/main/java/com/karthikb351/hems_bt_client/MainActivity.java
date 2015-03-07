@@ -5,6 +5,7 @@ import android.bluetooth.BluetoothAdapter;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -23,18 +24,18 @@ public class MainActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        bt = new BluetoothSPP(this);
-
+        bt = new BluetoothSPP(MainActivity.this);
         if(!bt.isBluetoothAvailable()) {
             Toast.makeText(getApplicationContext()
                     , "Bluetooth is not available"
                     , Toast.LENGTH_SHORT).show();
             finish();
         }
-
         bt.setOnDataReceivedListener(new BluetoothSPP.OnDataReceivedListener() {
+
             public void onDataReceived(byte[] data, String message) {
-                Toast.makeText(MainActivity.this, message, Toast.LENGTH_SHORT).show();
+                Log.i("onDataReceived", "got message: "+message);
+//                Toast.makeText(MainActivity.this, message, Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -82,7 +83,7 @@ public class MainActivity extends ActionBarActivity {
         } else {
             if(!bt.isServiceAvailable()) {
                 bt.setupService();
-                bt.startService(BluetoothState.DEVICE_ANDROID);
+                bt.startService(BluetoothState.DEVICE_OTHER);
                 setup();
             }
         }
@@ -95,6 +96,18 @@ public class MainActivity extends ActionBarActivity {
                 bt.send("gathik", true);
             }
         });
+        Button btnOn = (Button)findViewById(R.id.btnOn);
+        btnOn.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v){
+                bt.send("Q", true);
+            }
+        });
+        Button btnOff = (Button)findViewById(R.id.btnOff);
+        btnOff.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v){
+                bt.send("W", true);
+            }
+        });
     }
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -104,7 +117,7 @@ public class MainActivity extends ActionBarActivity {
         } else if(requestCode == BluetoothState.REQUEST_ENABLE_BT) {
             if(resultCode == Activity.RESULT_OK) {
                 bt.setupService();
-                bt.startService(BluetoothState.DEVICE_ANDROID);
+                bt.startService(BluetoothState.DEVICE_OTHER);
                 setup();
             } else {
                 Toast.makeText(getApplicationContext()
