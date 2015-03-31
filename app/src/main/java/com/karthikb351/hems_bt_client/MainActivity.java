@@ -125,6 +125,7 @@ public class MainActivity extends ActionBarActivity {
         mAdapter = new DevicesAdapter(getApplicationContext(), currentDevices) {
             @Override
             public void sendBTCommand(String cmd) {
+                Log.d("Sending BT Command", "Command:"+cmd);
                 bt.send(cmd, true);
             }
         };
