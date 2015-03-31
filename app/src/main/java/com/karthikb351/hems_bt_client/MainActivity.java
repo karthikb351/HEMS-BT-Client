@@ -130,6 +130,8 @@ public class MainActivity extends ActionBarActivity {
             }
         };
 
+        currentDevices = DeviceHelper.getPermanentDevices();
+
         mRecyclerView.setAdapter(mAdapter);
     }
 

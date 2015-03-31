@@ -8,6 +8,32 @@ import java.util.List;
  */
 public class DeviceHelper {
 
+    public static List<Device> getPermanentDevices() {
+        List<Device> devices = new ArrayList<>();
+
+        Device fan = new Device();
+        fan.setName("My device 1");
+        fan.setRfidTag("123233232");
+        fan.setVoltageRating("1.2V");
+        fan.setPowerRating("100W");
+        fan.setCurrentRating("1A");
+        fan.setPlug(PlugHelper.PLUG_FAN);
+
+        Device light = new Device();
+        light.setName("My device 1");
+        light.setRfidTag("123233232");
+        light.setVoltageRating("1.2V");
+        light.setPowerRating("100W");
+        light.setCurrentRating("1A");
+        light.setPlug(PlugHelper.PLUG_LIGHT);
+
+
+        devices.add(fan);
+        devices.add(light);
+
+        return devices;
+    }
+
     public static List<Device> getDevices() {
         List<Device> devices = new ArrayList<>();
 
@@ -46,29 +72,15 @@ public class DeviceHelper {
         d5.setPowerRating("100W");
         d5.setCurrentRating("1A");
 
-        Device fan = new Device();
-        fan.setName("My device 1");
-        fan.setRfidTag("123233232");
-        fan.setVoltageRating("1.2V");
-        fan.setPowerRating("100W");
-        fan.setCurrentRating("1A");
-        fan.setPlug(PlugHelper.PLUG_FAN);
 
-        Device light = new Device();
-        light.setName("My device 1");
-        light.setRfidTag("123233232");
-        light.setVoltageRating("1.2V");
-        light.setPowerRating("100W");
-        light.setCurrentRating("1A");
-        light.setPlug(PlugHelper.PLUG_LIGHT);
 
         devices.add(d1);
         devices.add(d2);
         devices.add(d3);
         devices.add(d4);
         devices.add(d5);
-        devices.add(fan);
-        devices.add(light);
+
+        devices.addAll(getPermanentDevices());
 
 
         return devices;
