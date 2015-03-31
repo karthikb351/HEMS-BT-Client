@@ -10,7 +10,7 @@ import java.util.Date;
 public class Device {
 
     String name = "Device";
-    String rfidTag;
+    String rfidTag = "";
     boolean status;
     String voltageRating = "1.2V";
     String powerRating = "100W";
