@@ -7,7 +7,7 @@ import java.util.Date;
 /**
  * Created by karthikbalakrishnan on 08/03/15.
  */
-public class Device extends SugarRecord<Device> {
+public class Device {
 
     String name = "Device";
     String rfidTag;
@@ -16,10 +16,17 @@ public class Device extends SugarRecord<Device> {
     String powerRating = "100W";
     String currentRating = "1A";
 
+    int plug = 0;
+
     String startTime;
 
-    // Relationship with Room table
-    Room room;
+    public int getPlug() {
+        return plug;
+    }
+
+    public void setPlug(int plug) {
+        this.plug = plug;
+    }
 
     public String getName() {
         return name;
@@ -77,11 +84,4 @@ public class Device extends SugarRecord<Device> {
         this.startTime = startTime;
     }
 
-    public Room getRoom() {
-        return room;
-    }
-
-    public void setRoom(Room room) {
-        this.room = room;
-    }
 }

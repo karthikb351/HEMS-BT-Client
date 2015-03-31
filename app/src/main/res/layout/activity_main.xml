@@ -32,51 +32,14 @@
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:padding="20dp">
-        <ToggleButton
-            android:id="@+id/btnToggle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textOn="On"
-            android:textOff="Off"/>
     </LinearLayout>
-    <LinearLayout
+
+    <RecyclerView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/btnLayout"
-        android:orientation="vertical">
-        <TextView
-            android:id="@+id/dName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="10dp"/>
-        <TextView
-            android:id="@+id/dTag"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="10dp"/>
-        <TextView
-            android:id="@+id/dVolt"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="10dp"/>
-        <TextView
-            android:id="@+id/dPow"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="10dp"/>
-        <TextView
-            android:id="@+id/dCur"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="10dp"/>
-        <TextView
-            android:id="@+id/dStatus"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="10dp"/>
+        android:id="@+id/device_recyclerview">
+    </RecyclerView>
 
-
-    </LinearLayout>
 
     <Button
         android:id="@+id/btnConnect"

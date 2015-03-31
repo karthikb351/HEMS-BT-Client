@@ -5,6 +5,8 @@ import android.bluetooth.BluetoothAdapter;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -15,8 +17,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
+import com.karthikb351.hems_bt_client.adapters.DevicesAdapter;
 import com.karthikb351.hems_bt_client.objects.Device;
+import com.karthikb351.hems_bt_client.objects.DeviceHelper;
+import com.karthikb351.hems_bt_client.objects.PlugHelper;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import app.akexorcist.bluetotohspp.library.BluetoothSPP;
@@ -27,13 +33,19 @@ import app.akexorcist.bluetotohspp.library.DeviceList;
 public class MainActivity extends ActionBarActivity {
 
     BluetoothSPP bt;
-    Device currentDevice;
+    List <Device> currentDevices = new ArrayList<>();
+    DevicesAdapter mAdapter;
+
     LinearLayout btnLayout;
+
+    RecyclerView mRecyclerView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         bt = new BluetoothSPP(MainActivity.this);
+
         if(!bt.isBluetoothAvailable()) {
             Toast.makeText(getApplicationContext()
                     , "Bluetooth is not available"
@@ -43,23 +55,28 @@ public class MainActivity extends ActionBarActivity {
         bt.setOnDataReceivedListener(new BluetoothSPP.OnDataReceivedListener() {
 
             public void onDataReceived(byte[] data, String message) {
-                Log.i("onDataReceived", "got message: " + message);
-                List<Device> devices = Device.find(Device.class,"rfid_tag = ?", message);
-                if(devices.isEmpty())   {
-                    Device d = new Device();
-                    d.setRfidTag(message);
-                    d.save();
-                    Toast.makeText(MainActivity.this, "new device: "+message, Toast.LENGTH_SHORT).show();
-                    currentDevice=d;
-                }
-                else    {
-                    for(Device d: devices) {
-                        Toast.makeText(MainActivity.this, "old device: "+d.getRfidTag(), Toast.LENGTH_SHORT).show();
-                        currentDevice=d;
+                Log.i("onDataReceived", "got data: " + message);
+                String tag = "";
+                String deviceName = "";
+                if(message.length()==15) {
+                    deviceName = message.substring(13);
+                    tag = message.substring(0,12);
+
+                    Device device = DeviceHelper.findDeviceByRfid(tag);
+                    if(device==null)   {
+                        Toast.makeText(MainActivity.this, "Unidentified tag: "+tag, Toast.LENGTH_LONG).show();
                     }
+                    else {
+                            Toast.makeText(MainActivity.this, "Adding device: "+device.getRfidTag(), Toast.LENGTH_SHORT).show();
+                            device.setPlug(PlugHelper.getPlugForTag(tag));
+                            currentDevices.add(device);
+                    }
+
+                }
+                else {
+                    Toast.makeText(MainActivity.this, "Can't parse data: "+message, Toast.LENGTH_LONG).show();
                 }
                 update();
-//
             }
         });
 
@@ -97,6 +114,21 @@ public class MainActivity extends ActionBarActivity {
 
         btnLayout = (LinearLayout)findViewById(R.id.btnLayout);
         btnLayout.setVisibility(View.GONE);
+
+        mRecyclerView = (RecyclerView) findViewById(R.id.device_recyclerview);
+        mRecyclerView.setHasFixedSize(true);
+        LinearLayoutManager llm = new LinearLayoutManager(MainActivity.this);
+        llm.setOrientation(LinearLayoutManager.VERTICAL);
+        mRecyclerView.setLayoutManager(llm);
+        mRecyclerView.setAdapter(mAdapter);
+
+
+        mAdapter = new DevicesAdapter(getApplicationContext(), currentDevices) {
+            @Override
+            public void sendBTCommand(String cmd) {
+                bt.send(cmd, true);
+            }
+        };
     }
 
     public String nullSafe(String d)
@@ -109,20 +141,8 @@ public class MainActivity extends ActionBarActivity {
     }
 
     public void update() {
-        TextView tag, name, pow, vol, cur, status;
-        tag = (TextView)findViewById(R.id.dTag);
-        name = (TextView)findViewById(R.id.dName);
-        pow = (TextView)findViewById(R.id.dPow);
-        vol = (TextView)findViewById(R.id.dVolt);
-        cur = (TextView)findViewById(R.id.dCur);
-        if(currentDevice!=null)
-        {
-            tag.setText(nullSafe(currentDevice.getRfidTag()));
-            name.setText(nullSafe(currentDevice.getName()));
-            pow.setText(nullSafe(currentDevice.getPowerRating()));
-            vol.setText(nullSafe(currentDevice.getVoltageRating()));
-            cur.setText(nullSafe(currentDevice.getCurrentRating()));
-        }
+        mAdapter.setDevices(currentDevices);
+        mAdapter.notifyDataSetChanged();
     }
 
     public void onDestroy() {
@@ -173,8 +193,9 @@ public class MainActivity extends ActionBarActivity {
         Button btnReset = (Button)findViewById(R.id.btnReset);
         btnReset.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
-                Device.deleteAll(Device.class);
-                Toast.makeText(MainActivity.this, "Cleared db", Toast.LENGTH_SHORT).show();
+                currentDevices=new ArrayList<Device>();
+                update();
+                Toast.makeText(MainActivity.this, "Cleared database", Toast.LENGTH_SHORT).show();
             }
         });
     }
