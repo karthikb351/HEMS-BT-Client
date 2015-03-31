@@ -60,7 +60,7 @@ public abstract class DevicesAdapter extends RecyclerView.Adapter<DevicesAdapter
             @Override
             public void onClick(View v) {
                 switch (v.getId()) {
-                    case R.id.btnToggle:
+                    case R.id.dToggle:
                         // Is the toggle on?
                         boolean on = ((ToggleButton) v).isChecked();
 
