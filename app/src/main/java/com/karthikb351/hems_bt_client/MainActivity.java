@@ -56,19 +56,19 @@ public class MainActivity extends ActionBarActivity {
 
             public void onDataReceived(byte[] data, String message) {
                 Log.i("onDataReceived", "got data: " + message);
-                String tag = "";
-                String deviceName = "";
+                String rfid_tag = "";
+                String plug_tag = "";
                 if(message.length()==15) {
-                    deviceName = message.substring(13);
-                    tag = message.substring(0,12);
+                    plug_tag = message.substring(13);
+                    rfid_tag = message.substring(0,12);
 
-                    Device device = DeviceHelper.findDeviceByRfid(tag);
+                    Device device = DeviceHelper.findDeviceByRfid(rfid_tag);
                     if(device==null)   {
-                        Toast.makeText(MainActivity.this, "Unidentified tag: "+tag, Toast.LENGTH_LONG).show();
+                        Toast.makeText(MainActivity.this, "Unidentified tag: "+rfid_tag, Toast.LENGTH_LONG).show();
                     }
                     else {
                             Toast.makeText(MainActivity.this, "Adding device: "+device.getRfidTag(), Toast.LENGTH_SHORT).show();
-                            device.setPlug(PlugHelper.getPlugForTag(tag));
+                            device.setPlug(PlugHelper.getPlugForTag(plug_tag));
                             currentDevices.add(device);
                     }
 
