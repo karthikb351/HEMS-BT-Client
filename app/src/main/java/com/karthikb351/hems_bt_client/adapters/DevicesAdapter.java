@@ -101,9 +101,9 @@ public abstract class DevicesAdapter extends RecyclerView.Adapter<DevicesAdapter
             super(itemView);
             tag = (TextView)itemView.findViewById(R.id.dTag);
             name = (TextView)itemView.findViewById(R.id.dName);
-            power = (TextView)itemView.findViewById(R.id.dPow);
-            voltage = (TextView)itemView.findViewById(R.id.dVolt);
-            current = (TextView)itemView.findViewById(R.id.dCur);
+            power = (TextView)itemView.findViewById(R.id.dPower);
+            voltage = (TextView)itemView.findViewById(R.id.dVoltage);
+            current = (TextView)itemView.findViewById(R.id.dCurrent);
             status = (TextView)itemView.findViewById(R.id.dStatus);
         }
 
