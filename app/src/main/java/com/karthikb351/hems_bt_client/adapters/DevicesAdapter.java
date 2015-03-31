@@ -56,7 +56,7 @@ public abstract class DevicesAdapter extends RecyclerView.Adapter<DevicesAdapter
         viewHolder.voltage.setText(d.getVoltageRating());
         viewHolder.current.setText(d.getCurrentRating());
 
-        viewHolder.mListener = new ListItemViewHolder.ViewHolderClick() {
+        viewHolder.toggle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 switch (v.getId()) {
@@ -74,7 +74,7 @@ public abstract class DevicesAdapter extends RecyclerView.Adapter<DevicesAdapter
 
                 }
             }
-        };
+        });
     }
 
     public abstract void sendBTCommand(String cmd);
@@ -84,7 +84,7 @@ public abstract class DevicesAdapter extends RecyclerView.Adapter<DevicesAdapter
         return devices.size();
     }
 
-    public final static class ListItemViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public final static class ListItemViewHolder extends RecyclerView.ViewHolder {
         public TextView tag;
         public TextView name;
         public TextView power;
@@ -93,8 +93,6 @@ public abstract class DevicesAdapter extends RecyclerView.Adapter<DevicesAdapter
         public TextView status;
 
         public ToggleButton toggle;
-
-        public ViewHolderClick mListener;
 
 
         public ListItemViewHolder(View itemView) {
@@ -105,15 +103,7 @@ public abstract class DevicesAdapter extends RecyclerView.Adapter<DevicesAdapter
             voltage = (TextView)itemView.findViewById(R.id.dVoltage);
             current = (TextView)itemView.findViewById(R.id.dCurrent);
             status = (TextView)itemView.findViewById(R.id.dStatus);
-        }
-
-        @Override
-        public void onClick(View v) {
-            mListener.onClick(v);
-        }
-
-        public static interface ViewHolderClick {
-            public void onClick(View v);
+            toggle = (ToggleButton)itemView.findViewById(R.id.dToggle);
         }
     }
 
