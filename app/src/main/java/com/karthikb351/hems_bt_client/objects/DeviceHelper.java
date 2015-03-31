@@ -52,6 +52,7 @@ public class DeviceHelper {
         fan.setVoltageRating("1.2V");
         fan.setPowerRating("100W");
         fan.setCurrentRating("1A");
+        fan.setPlug(PlugHelper.PLUG_FAN);
 
         Device light = new Device();
         light.setName("My device 1");
@@ -59,6 +60,7 @@ public class DeviceHelper {
         light.setVoltageRating("1.2V");
         light.setPowerRating("100W");
         light.setCurrentRating("1A");
+        light.setPlug(PlugHelper.PLUG_LIGHT);
 
         devices.add(d1);
         devices.add(d2);
