@@ -171,25 +171,6 @@ public class MainActivity extends ActionBarActivity {
                 bt.send("gathik", true);
             }
         });
-
-        ToggleButton btnToggle = (ToggleButton)findViewById(R.id.btnToggle);
-        btnToggle.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Is the toggle on?
-                boolean on = ((ToggleButton) v).isChecked();
-
-                if (on) {
-                    bt.send("Q", true);
-                    TextView status = (TextView)findViewById(R.id.dStatus);
-                    status.setText("Enabled");
-                } else {
-                    bt.send("W", true);
-                    TextView status = (TextView)findViewById(R.id.dStatus);
-                    status.setText("Disabled");
-                }
-            }
-        });
         Button btnReset = (Button)findViewById(R.id.btnReset);
         btnReset.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
