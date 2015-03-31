@@ -1,5 +1,7 @@
 package com.karthikb351.hems_bt_client.objects;
 
+import android.util.Log;
+
 /**
  * Created by karthikbalakrishnan on 30/03/15.
  */
@@ -55,17 +57,20 @@ public class PlugHelper {
     }
 
     public static int getPlugForTag(String tag) {
+        int plug = -1;
         switch (tag) {
             case "P1":
-                return PLUG_P1;
-
+                plug = PLUG_P1;
+                break;
             case "P2":
-                return PLUG_P2;
-
+                plug = PLUG_P2;
+                break;
             case "P3":
-                return PLUG_P3;
+                plug = PLUG_P3;
+                break;
         }
-        return -1;
+        Log.d("getPlugForTag", "Plug for tag"+tag+"  is "+plug);
+        return plug;
     }
 
 }

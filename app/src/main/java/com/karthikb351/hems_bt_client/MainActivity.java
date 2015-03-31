@@ -71,7 +71,6 @@ public class MainActivity extends ActionBarActivity {
                             device.setPlug(PlugHelper.getPlugForTag(plug_tag));
                             currentDevices.add(device);
                     }
-
                 }
                 else {
                     Toast.makeText(MainActivity.this, "Can't parse data: "+message, Toast.LENGTH_LONG).show();
