@@ -120,7 +120,7 @@ public class MainActivity extends ActionBarActivity {
         llm.setOrientation(LinearLayoutManager.VERTICAL);
         mRecyclerView.setLayoutManager(llm);
 
-
+        currentDevices = DeviceHelper.getPermanentDevices();
 
         mAdapter = new DevicesAdapter(getApplicationContext(), currentDevices) {
             @Override
@@ -129,8 +129,6 @@ public class MainActivity extends ActionBarActivity {
                 bt.send(cmd, true);
             }
         };
-
-        currentDevices = DeviceHelper.getPermanentDevices();
 
         mRecyclerView.setAdapter(mAdapter);
     }
