@@ -67,9 +67,14 @@ public class MainActivity extends ActionBarActivity {
                         Toast.makeText(MainActivity.this, "Unidentified tag: "+rfid_tag, Toast.LENGTH_LONG).show();
                     }
                     else {
-                            Toast.makeText(MainActivity.this, "Adding device: "+device.getRfidTag(), Toast.LENGTH_SHORT).show();
-                            device.setPlug(PlugHelper.getPlugForTag(plug_tag));
-                            currentDevices.add(device);
+                        Toast.makeText(MainActivity.this, "Adding device: "+device.getRfidTag(), Toast.LENGTH_SHORT).show();
+                        int plug = PlugHelper.getPlugForTag(plug_tag);
+                        for(Device d: currentDevices) {
+                            if(d.getPlug()==plug)
+                                currentDevices.remove(d);
+                        }
+                        device.setPlug(plug);
+                        currentDevices.add(device);
                     }
                 }
                 else {
