@@ -12,9 +12,9 @@ public class Device {
     String name = "Device";
     String rfidTag = "";
     boolean status;
-    String voltageRating = "1.2V";
-    String powerRating = "100W";
-    String currentRating = "1A";
+    String voltageRating = "1.2";
+    String powerRating = "100";
+    String currentRating = "1";
 
     int plug = 0;
 
