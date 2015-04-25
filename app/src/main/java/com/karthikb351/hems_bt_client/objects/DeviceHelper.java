@@ -38,35 +38,35 @@ public class DeviceHelper {
         List<Device> devices = new ArrayList<>();
 
         Device d1 = new Device();
-        d1.setName("My device 1");
-        d1.setRfidTag("123233232");
-        d1.setVoltageRating("1.2V");
-        d1.setPowerRating("100W");
-        d1.setCurrentRating("1A");
+        d1.setName("Iron");
+        d1.setRfidTag("0C0045D1C65D");
+        d1.setVoltageRating("240");
+        d1.setPowerRating("1000");
+        d1.setCurrentRating("2.5");
 
         Device d2 = new Device();
-        d2.setName("My device 1");
+        d2.setName("My device 2");
         d2.setRfidTag("123233232");
         d2.setVoltageRating("1.2V");
         d2.setPowerRating("100W");
         d2.setCurrentRating("1A");
 
         Device d3 = new Device();
-        d3.setName("My device 1");
+        d3.setName("My device 3");
         d3.setRfidTag("123233232");
         d3.setVoltageRating("1.2V");
         d3.setPowerRating("100W");
         d3.setCurrentRating("1A");
 
         Device d4 = new Device();
-        d4.setName("My device 1");
+        d4.setName("My device 4");
         d4.setRfidTag("123233232");
         d4.setVoltageRating("1.2V");
         d4.setPowerRating("100W");
         d4.setCurrentRating("1A");
 
         Device d5 = new Device();
-        d5.setName("My device 1");
+        d5.setName("My device 5");
         d5.setRfidTag("123233232");
         d5.setVoltageRating("1.2V");
         d5.setPowerRating("100W");
