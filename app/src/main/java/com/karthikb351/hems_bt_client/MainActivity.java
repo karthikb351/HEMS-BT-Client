@@ -172,18 +172,19 @@ public class MainActivity extends ActionBarActivity {
     }
 
     public void setup() {
-        Button btnSend = (Button)findViewById(R.id.btnSend);
-        btnSend.setOnClickListener(new View.OnClickListener(){
+        Button btnBill = (Button)findViewById(R.id.btnBill);
+        btnBill.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
-                bt.send("gathik", true);
-            }
-        });
-        Button btnReset = (Button)findViewById(R.id.btnReset);
-        btnReset.setOnClickListener(new View.OnClickListener(){
-            public void onClick(View v){
-                currentDevices=new ArrayList<Device>();
-                update();
-                Toast.makeText(MainActivity.this, "Cleared database", Toast.LENGTH_SHORT).show();
+                String msg = "";
+                double sum = 0.0;
+                for(Device d:currentDevices)
+                {
+                    double cost = DeviceHelper.generateBill(d);
+                    sum = sum + cost;
+                    msg = msg + d.getName()+" = Rs. "+cost+"/-\n";
+                }
+                msg = msg +"\n Sum = Rs. "+sum+"/-";
+                Toast.makeText(MainActivity.this, msg, Toast.LENGTH_LONG).show();
             }
         });
     }

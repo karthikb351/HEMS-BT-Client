@@ -14,6 +14,7 @@ import com.karthikb351.hems_bt_client.objects.PlugHelper;
 
 import org.w3c.dom.Text;
 
+import java.util.Calendar;
 import java.util.List;
 
 /**
@@ -66,9 +67,11 @@ public abstract class DevicesAdapter extends RecyclerView.Adapter<DevicesAdapter
 
                         if (on) {
                             sendBTCommand(PlugHelper.getOnCommandForPlug(d.getPlug()));
+                            d.setStartTime(Calendar.getInstance().getTimeInMillis());
                             viewHolder.status.setText("Enabled");
                         } else {
                             sendBTCommand(PlugHelper.getOffCommandForPlug(d.getPlug()));
+                            d.setEndTime(Calendar.getInstance().getTimeInMillis());
                             viewHolder.status.setText("Disabled");
                         }
 

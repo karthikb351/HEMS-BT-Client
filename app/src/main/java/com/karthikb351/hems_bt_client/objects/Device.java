@@ -18,7 +18,8 @@ public class Device {
 
     int plug = 0;
 
-    String startTime;
+    long startTime;
+    long endTime;
 
     public int getPlug() {
         return plug;
@@ -76,12 +77,19 @@ public class Device {
         this.currentRating = currentRating;
     }
 
-    public String getStartTime() {
+    public long getStartTime() {
         return startTime;
     }
 
-    public void setStartTime(String startTime) {
+    public void setStartTime(long startTime) {
         this.startTime = startTime;
     }
 
+    public long getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(long endTime) {
+        this.endTime = endTime;
+    }
 }
