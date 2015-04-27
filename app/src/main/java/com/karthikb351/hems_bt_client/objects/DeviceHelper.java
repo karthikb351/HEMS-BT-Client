@@ -12,19 +12,19 @@ public class DeviceHelper {
         List<Device> devices = new ArrayList<>();
 
         Device fan = new Device();
-        fan.setName("My device 1");
+        fan.setName("Fan");
         fan.setRfidTag("123233232");
-        fan.setVoltageRating("1.2V");
-        fan.setPowerRating("100W");
-        fan.setCurrentRating("1A");
+        fan.setVoltageRating("240");
+        fan.setPowerRating("75");
+        fan.setCurrentRating("0.31");
         fan.setPlug(PlugHelper.PLUG_FAN);
 
         Device light = new Device();
-        light.setName("My device 1");
+        light.setName("Light");
         light.setRfidTag("123233232");
-        light.setVoltageRating("1.2V");
-        light.setPowerRating("100W");
-        light.setCurrentRating("1A");
+        light.setVoltageRating("240");
+        light.setPowerRating("60");
+        light.setCurrentRating("0.25");
         light.setPlug(PlugHelper.PLUG_LIGHT);
 
 
@@ -42,35 +42,35 @@ public class DeviceHelper {
         d1.setRfidTag("0C0045D1C65D");
         d1.setVoltageRating("240");
         d1.setPowerRating("1000");
-        d1.setCurrentRating("2.5");
+        d1.setCurrentRating("4.17");
 
         Device d2 = new Device();
-        d2.setName("My device 2");
-        d2.setRfidTag("123233232");
-        d2.setVoltageRating("1.2V");
-        d2.setPowerRating("100W");
-        d2.setCurrentRating("1A");
+        d2.setName("Induction Stove");
+        d2.setRfidTag("0C00473FBFCB");
+        d2.setVoltageRating("240");
+        d2.setPowerRating("2000");
+        d2.setCurrentRating("8.34");
 
         Device d3 = new Device();
-        d3.setName("My device 3");
-        d3.setRfidTag("123233232");
-        d3.setVoltageRating("1.2V");
-        d3.setPowerRating("100W");
-        d3.setCurrentRating("1A");
+        d3.setName("Microwave Owen");
+        d3.setRfidTag("0C004793B961");
+        d3.setVoltageRating("240");
+        d3.setPowerRating("1200");
+        d3.setCurrentRating("5");
 
         Device d4 = new Device();
-        d4.setName("My device 4");
-        d4.setRfidTag("123233232");
-        d4.setVoltageRating("1.2V");
-        d4.setPowerRating("100W");
-        d4.setCurrentRating("1A");
+        d4.setName("Heater");
+        d4.setRfidTag("0C004B5B627E");
+        d4.setVoltageRating("240");
+        d4.setPowerRating("3000");
+        d4.setCurrentRating("12.5");
 
         Device d5 = new Device();
-        d5.setName("My device 5");
-        d5.setRfidTag("123233232");
-        d5.setVoltageRating("1.2V");
-        d5.setPowerRating("100W");
-        d5.setCurrentRating("1A");
+        d5.setName("Rice Cooker");
+        d5.setRfidTag("0C004794D807");
+        d5.setVoltageRating("240");
+        d5.setPowerRating("650");
+        d5.setCurrentRating("2.7");
 
 
 
