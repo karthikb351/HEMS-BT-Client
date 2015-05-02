@@ -169,6 +169,21 @@ public class MainActivity extends ActionBarActivity {
         }
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if(TariffHelper.isPeakTime()) {
+            new AlertDialog.Builder(MainActivity.this)
+
+                    .setTitle("Peak Usage")
+                    .setMessage("You are currently in a peak usage time")
+                    .setCancelable(false)
+                    .setPositiveButton("OK", null)
+
+                    .create().show();
+        }
+    }
+
     public void setup() {
         Button btnBill = (Button)findViewById(R.id.btnBill);
         btnBill.setOnClickListener(new View.OnClickListener(){
@@ -188,7 +203,7 @@ public class MainActivity extends ActionBarActivity {
                         .setTitle("Your Bill")
                         .setMessage(msg)
                         .setCancelable(false)
-                        .setPositiveButton("ok", null)
+                        .setPositiveButton("OK", null)
 
                         .create().show();
             }
