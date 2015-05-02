@@ -1,42 +1,108 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <TextView
-        android:id="@+id/dName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="10dp"/>
-    <TextView
-        android:id="@+id/dTag"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="10dp"/>
-    <TextView
-        android:id="@+id/dVoltage"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="10dp"/>
-    <TextView
-        android:id="@+id/dPower"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="10dp"/>
-    <TextView
-        android:id="@+id/dCurrent"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="10dp"/>
-    <TextView
-        android:id="@+id/dStatus"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="10dp"/>
 
-    <ToggleButton
-        android:id="@+id/dToggle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textOn="On"
-        android:textOff="Off"/>
-</LinearLayout>
+    <TableRow
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+
+        <TextView
+            android:id="@+id/dName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:autoText="false"
+            android:textColor="#ff000000"
+            android:textSize="18sp" />
+
+        <ToggleButton
+            android:id="@+id/dToggle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textOn="On"
+            android:textOff="Off"
+            android:layout_column="2"
+            android:layout_gravity="right" />
+    </TableRow>
+
+    <TableRow
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Voltage (V) :"
+            android:id="@+id/VoltText"
+            android:layout_column="0"
+            android:textColor="#ff000000"
+            android:textSize="14sp"
+            android:padding="10dp" />
+
+        <TextView
+            android:id="@+id/dVoltage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:textSize="14sp"
+            android:textColor="#ff000000" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Current (A) :"
+            android:id="@+id/CurrText"
+            android:textColor="#ff000000"
+            android:textSize="14sp"
+            android:padding="10dp" />
+
+        <TextView
+            android:id="@+id/dCurrent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:textColor="#ff000000"
+            android:textSize="14sp" />
+
+    </TableRow>
+
+    <TableRow
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Power (W) :"
+            android:id="@+id/PoweText"
+            android:padding="10dp"
+            android:textColor="#ff000000"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/dPower"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:textSize="14sp"
+            android:textColor="#ff000000" />
+    </TableRow>
+
+    <TableRow
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+
+        <TextView
+            android:id="@+id/dStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:layout_span="20"
+            android:textIsSelectable="false"
+            android:textSize="14sp"
+            android:textColor="#ff000000" />
+
+    </TableRow>
+
+</TableLayout>
