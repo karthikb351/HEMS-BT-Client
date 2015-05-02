@@ -1,6 +1,8 @@
 package com.karthikb351.hems_bt_client.adapters;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +13,7 @@ import android.widget.ToggleButton;
 import com.karthikb351.hems_bt_client.R;
 import com.karthikb351.hems_bt_client.objects.Device;
 import com.karthikb351.hems_bt_client.objects.PlugHelper;
+import com.karthikb351.hems_bt_client.objects.TariffHelper;
 
 import org.w3c.dom.Text;
 
@@ -58,22 +61,49 @@ public abstract class DevicesAdapter extends RecyclerView.Adapter<DevicesAdapter
 
         viewHolder.toggle.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(final View v) {
                 switch (v.getId()) {
                     case R.id.dToggle:
                         // Is the toggle on?
                         boolean on = ((ToggleButton) v).isChecked();
 
                         if (on) {
-                            sendBTCommand(PlugHelper.getOnCommandForPlug(d.getPlug()));
-                            d.setStartTime(Calendar.getInstance().getTimeInMillis());
-                            viewHolder.status.setText("Enabled");
+                            if(TariffHelper.isPeakTime())
+                                new AlertDialog.Builder(context)
+                                    .setTitle("Peak Usage Period")
+                                    .setMessage("You will be charged higher rates during this time. Consider using this device later.")
+                                    .setCancelable(false)
+                                    .setPositiveButton("Turn on anyway", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            sendBTCommand(PlugHelper.getOnCommandForPlug(d.getPlug()));
+                                            d.setStartTime(Calendar.getInstance().getTimeInMillis());
+                                            viewHolder.status.setText("Enabled");
+                                        }
+                                    })
+                                    .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            ((ToggleButton) v).setChecked(false);
+                                        }
+                                    })
+                                    .setOnCancelListener(new DialogInterface.OnCancelListener() {
+                                        @Override
+                                        public void onCancel(DialogInterface dialog) {
+                                            ((ToggleButton) v).setChecked(false);
+                                        }
+                                    })
+                                    .create().show();
+                            else {
+                                sendBTCommand(PlugHelper.getOnCommandForPlug(d.getPlug()));
+                                d.setStartTime(Calendar.getInstance().getTimeInMillis());
+                                viewHolder.status.setText("Enabled");
+                            }
                         } else {
                             sendBTCommand(PlugHelper.getOffCommandForPlug(d.getPlug()));
                             d.setEndTime(Calendar.getInstance().getTimeInMillis());
                             viewHolder.status.setText("Disabled");
                         }
-
                 }
             }
         });

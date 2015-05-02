@@ -1,6 +1,7 @@
 package com.karthikb351.hems_bt_client;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.bluetooth.BluetoothAdapter;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
@@ -8,19 +9,16 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.ToggleButton;
 
 import com.karthikb351.hems_bt_client.adapters.DevicesAdapter;
 import com.karthikb351.hems_bt_client.objects.Device;
 import com.karthikb351.hems_bt_client.objects.DeviceHelper;
 import com.karthikb351.hems_bt_client.objects.PlugHelper;
+import com.karthikb351.hems_bt_client.objects.TariffHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -127,7 +125,7 @@ public class MainActivity extends ActionBarActivity {
 
         currentDevices = DeviceHelper.getPermanentDevices();
 
-        mAdapter = new DevicesAdapter(getApplicationContext(), currentDevices) {
+        mAdapter = new DevicesAdapter(MainActivity.this, currentDevices) {
             @Override
             public void sendBTCommand(String cmd) {
                 Log.d("Sending BT Command", "Command:"+cmd);
@@ -179,12 +177,20 @@ public class MainActivity extends ActionBarActivity {
                 double sum = 0.0;
                 for(Device d:currentDevices)
                 {
-                    double cost = DeviceHelper.generateBill(d);
+                    double cost = TariffHelper.calculateCost(d);
                     sum = sum + cost;
                     msg = msg + d.getName()+" = Rs. "+cost+"/-\n";
                 }
                 msg = msg +"\n Sum = Rs. "+sum+"/-";
-                Toast.makeText(MainActivity.this, msg, Toast.LENGTH_LONG).show();
+                //Toast.makeText(MainActivity.this, msg, Toast.LENGTH_LONG).show();
+                new AlertDialog.Builder(MainActivity.this)
+
+                        .setTitle("Your Bill")
+                        .setMessage(msg)
+                        .setCancelable(false)
+                        .setPositiveButton("ok", null)
+
+                        .create().show();
             }
         });
     }
