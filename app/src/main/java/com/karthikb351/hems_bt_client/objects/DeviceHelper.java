@@ -55,7 +55,7 @@ public class DeviceHelper {
         d2.setCurrentRating("8.34");
 
         Device d3 = new Device();
-        d3.setName("Microwave Owen");
+        d3.setName("Microwave Oven");
         d3.setRfidTag("0C004793B961");
         d3.setVoltageRating("240");
         d3.setPowerRating("1200");

@@ -52,7 +52,6 @@ public abstract class DevicesAdapter extends RecyclerView.Adapter<DevicesAdapter
     public void onBindViewHolder(final ListItemViewHolder viewHolder, int position) {
         final Device d = devices.get(position);
         viewHolder.name.setText(d.getName());
-        viewHolder.tag.setText(d.getRfidTag());
         viewHolder.power.setText(d.getPowerRating());
         viewHolder.voltage.setText(d.getVoltageRating());
         viewHolder.current.setText(d.getCurrentRating());
@@ -88,7 +87,6 @@ public abstract class DevicesAdapter extends RecyclerView.Adapter<DevicesAdapter
     }
 
     public final static class ListItemViewHolder extends RecyclerView.ViewHolder {
-        public TextView tag;
         public TextView name;
         public TextView power;
         public TextView voltage;
@@ -100,7 +98,6 @@ public abstract class DevicesAdapter extends RecyclerView.Adapter<DevicesAdapter
 
         public ListItemViewHolder(View itemView) {
             super(itemView);
-            tag = (TextView)itemView.findViewById(R.id.dTag);
             name = (TextView)itemView.findViewById(R.id.dName);
             power = (TextView)itemView.findViewById(R.id.dPower);
             voltage = (TextView)itemView.findViewById(R.id.dVoltage);
