@@ -79,6 +79,7 @@ public abstract class DevicesAdapter extends RecyclerView.Adapter<DevicesAdapter
                                             sendBTCommand(PlugHelper.getOnCommandForPlug(d.getPlug()));
                                             d.setStartTime(Calendar.getInstance().getTimeInMillis());
                                             viewHolder.status.setText("Enabled");
+                                            d.setStatus(true);
                                         }
                                     })
                                     .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -98,11 +99,13 @@ public abstract class DevicesAdapter extends RecyclerView.Adapter<DevicesAdapter
                                 sendBTCommand(PlugHelper.getOnCommandForPlug(d.getPlug()));
                                 d.setStartTime(Calendar.getInstance().getTimeInMillis());
                                 viewHolder.status.setText("Enabled");
+                                d.setStatus(true);
                             }
                         } else {
                             sendBTCommand(PlugHelper.getOffCommandForPlug(d.getPlug()));
                             d.setEndTime(Calendar.getInstance().getTimeInMillis());
                             viewHolder.status.setText("Disabled");
+                            d.setStatus(false);
                         }
                 }
             }

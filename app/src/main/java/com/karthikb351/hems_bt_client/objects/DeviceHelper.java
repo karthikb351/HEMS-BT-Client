@@ -21,6 +21,7 @@ public class DeviceHelper {
         fan.setPowerRating("75");
         fan.setCurrentRating("0.31");
         fan.setPlug(PlugHelper.PLUG_FAN);
+        fan.setStatus(false);
 
         Device light = new Device();
         light.setName("Light");
@@ -29,12 +30,21 @@ public class DeviceHelper {
         light.setPowerRating("60");
         light.setCurrentRating("0.25");
         light.setPlug(PlugHelper.PLUG_LIGHT);
+        light.setStatus(false);
 
 
         devices.add(fan);
         devices.add(light);
 
         return devices;
+    }
+
+    public static boolean areDevicesTurnedOn(List<Device> devices) {
+        boolean flag = false;
+        for(Device d:devices)
+            if(d.getStatus())
+                flag=true;
+        return flag;
     }
 
     public static List<Device> getDevices() {
@@ -46,6 +56,7 @@ public class DeviceHelper {
         d1.setVoltageRating("240");
         d1.setPowerRating("1000");
         d1.setCurrentRating("4.17");
+        d1.setStatus(false);
 
         Device d2 = new Device();
         d2.setName("Induction Stove");
@@ -53,6 +64,7 @@ public class DeviceHelper {
         d2.setVoltageRating("240");
         d2.setPowerRating("2000");
         d2.setCurrentRating("8.34");
+        d2.setStatus(false);
 
         Device d3 = new Device();
         d3.setName("Microwave Oven");
@@ -60,6 +72,7 @@ public class DeviceHelper {
         d3.setVoltageRating("240");
         d3.setPowerRating("1200");
         d3.setCurrentRating("5");
+        d3.setStatus(false);
 
         Device d4 = new Device();
         d4.setName("Heater");
@@ -67,6 +80,7 @@ public class DeviceHelper {
         d4.setVoltageRating("240");
         d4.setPowerRating("3000");
         d4.setCurrentRating("12.5");
+        d4.setStatus(false);
 
         Device d5 = new Device();
         d5.setName("Rice Cooker");
@@ -74,6 +88,7 @@ public class DeviceHelper {
         d5.setVoltageRating("240");
         d5.setPowerRating("650");
         d5.setCurrentRating("2.7");
+        d5.setStatus(false);
 
         devices.add(d1);
         devices.add(d2);
@@ -85,22 +100,6 @@ public class DeviceHelper {
 
 
         return devices;
-    }
-
-    public static double getTimeDifference(Device d) {
-        double time = 0.0;
-        if(d.getEndTime()>=d.getStartTime())
-            time = time + (d.getEndTime()-d.getStartTime())/(1000*60*60.0);
-        else
-            time = time + (Calendar.getInstance().getTimeInMillis()-d.getStartTime())/(1000*60*60.0);
-        Log.i("TimeDiff", "Is :"+String.valueOf(time));
-        return time;
-    }
-
-    public static double generateBill(Device d) {
-        double cost = 0;
-        cost = (Double.parseDouble(d.getPowerRating())/1000.0)*getTimeDifference(d)*5.0;  // TODO: Arbitrary tariff
-        return cost;
     }
 
     public static Device findDeviceByRfid(String rfid) {

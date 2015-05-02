@@ -172,7 +172,7 @@ public class MainActivity extends ActionBarActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        if(TariffHelper.isPeakTime()) {
+        if(TariffHelper.isPeakTime() && DeviceHelper.areDevicesTurnedOn(currentDevices)) {
             new AlertDialog.Builder(MainActivity.this)
 
                     .setTitle("Peak Usage")

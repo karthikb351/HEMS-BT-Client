@@ -45,7 +45,7 @@ public class Device {
         this.rfidTag = rfidTag;
     }
 
-    public boolean isStatus() {
+    public boolean getStatus() {
         return status;
     }
 
